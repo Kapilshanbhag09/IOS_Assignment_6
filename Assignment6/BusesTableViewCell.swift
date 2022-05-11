@@ -25,7 +25,7 @@ class BusesTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        buslogoImage.image = UIImage(named: "20059")
+       
         //buslogoImage.image?.size=CGSize(width: 100.0, height:100.0)ce
         
     }

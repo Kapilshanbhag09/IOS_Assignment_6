@@ -7,7 +7,7 @@
 
 import UIKit
 protocol FilterAndSortDelegate{
-func filterApplied(Filter:String)
+    func filterApplied(filterString:String,busType:bc)
 }
 class ViewController: UIViewController,FilterAndSortDelegate {
     @IBOutlet weak var fromLabel:UILabel!
@@ -15,10 +15,18 @@ class ViewController: UIViewController,FilterAndSortDelegate {
     @IBOutlet weak var applyFilterButton:UIButton!
     @IBOutlet weak var busesTableView:UITableView!
     var SortAndFilterVC=SortAndFilterViewController()
+    
     var responseFromAPI = APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
  let ViewControllerModelInstance=ViewControllerModel()
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        SortAndFilterVC.delegate=self
         responseFromAPI=ViewControllerModelInstance.getDataFromAPI()
         fromLabel.text="From : "+responseFromAPI.metaData.src
         toLabel.text="To : "+responseFromAPI.metaData.dst
@@ -26,13 +34,17 @@ class ViewController: UIViewController,FilterAndSortDelegate {
         
         self.busesTableView.dataSource = self
         busesTableView.register(UINib(nibName: "BusesTableViewCell", bundle: nil), forCellReuseIdentifier:"tableViewCell")
+        //SortAndFilter.delegate=self
     }
     @objc func applyFilterButtonClicked(){
     present(SortAndFilterVC, animated: true)
     }
-    func filterApplied(Filter:String){
-        print("Filter Applied")
-        fromLabel.text="Delegate"
+    func filterApplied(filterString:String,busType:bc){
+        print("Filter applied called")
+        responseFromAPI=ViewControllerModelInstance.appySortAndFilter(filterString: filterString, bustype: busType)
+        //print(responseFromAPI)
+        //print(ViewControllerModelInstance.appySortAndFilter(filterString: filterString, bustype: busType))
+        busesTableView.reloadData()
     }
 
 
@@ -48,6 +60,8 @@ extension ViewController:UITableViewDataSource{
         cell.travelsLabel.text = responseFromAPI.inv[indexPath.row].tvs
         cell.ratingLabel.text = "\(responseFromAPI.inv[indexPath.row].rt.totRt)"
         cell.priceLabel.text="\(responseFromAPI.inv[indexPath.row].minfr) \(responseFromAPI.inv[indexPath.row].cur)"
+        var url="\(responseFromAPI.metaData.blu)/\(responseFromAPI.inv[indexPath.row].lp)"
+        cell.buslogoImage.image=ViewControllerModelInstance.getImage(url: url)
         var filterString:String=""
         if(responseFromAPI.inv[indexPath.row].bc.IsAc){
             filterString = filterString+"AC "
@@ -62,7 +76,6 @@ extension ViewController:UITableViewDataSource{
             filterString = filterString+"Sleeper "
         }
         cell.filterLabel.text=filterString
-        
         let arrival=responseFromAPI.inv[indexPath.row].at
         let arrivalDate=ViewControllerModelInstance.getDate(arrival: arrival)
         let arrivalTime=ViewControllerModelInstance.getTime(timeStamp: arrival)

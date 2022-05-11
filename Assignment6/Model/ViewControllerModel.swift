@@ -1,10 +1,3 @@
-//
-//  ViewControllerModel.swift
-//  Assignment6
-//
-//  Created by Kapil Ganesh Shanbhag on 09/05/22.
-//
-
 import Foundation
 import UIKit
 
@@ -40,8 +33,11 @@ struct APIRespStruct:Decodable{
 }
 
 class ViewControllerModel{
+    var respFromAPI=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
+    var filteredRespFromAPI=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
+    var NetworkManagerInstance=NetworkManager()
+    // MARK: GETDATAFROMAPI() func
     func getDataFromAPI()->APIRespStruct{
-        var resp=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
         let url = URL(string:  "https://api.jsonbin.io/b/6093c95293e0ce40806d8a1d")!
         let semaphore = DispatchSemaphore(value: 0)
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
@@ -49,21 +45,7 @@ class ViewControllerModel{
             let strdata=String(data: data, encoding: .utf8)
             do{
                 let response=try JSONDecoder().decode(APIRespStruct.self, from:Data(strdata!.utf8))
-//                print(response.metaData.dst)
-//                print(response.metaData.src)
-//                print(response.metaData.blu)
-//                for i in 0..<response.inv.count{
-//                    print("INV ARr")
-//                    print(response.inv[i].dt)
-//                    print(response.inv[i].at)
-//                    print(response.inv[i].rt)
-//                    print(response.inv[i].minfr)
-//                    print(response.inv[i].bc)
-//                    print(response.inv[i].tvs)
-//                    print(response.inv[i].lp)
-//                    print(response.inv[i].cur)
-//                }
-                resp=response
+                self.respFromAPI=response
                 
             }
             catch{
@@ -73,8 +55,170 @@ class ViewControllerModel{
         }
         task.resume()
         semaphore.wait()
-        return resp
+        respFromAPI.inv[0].minfr=20
+        respFromAPI.inv[1].minfr=15
+        respFromAPI.inv[2].rt.totRt=4.5
+        respFromAPI.inv[3].rt.totRt=5.0
+        respFromAPI.inv[4].rt.totRt=4.0
+        respFromAPI.inv[0].dt="2021-05-22 17:30:00"
+        respFromAPI.inv[1].dt="2021-05-22 12:00:00"
+        respFromAPI.inv[0].bc.IsAc=false
+        respFromAPI.inv[0].bc.IsNonAc=true
+        respFromAPI.inv[1].bc.IsSeater=false
+        respFromAPI.inv[1].bc.IsSleeper=true
+        respFromAPI.inv[3].bc.IsAc=false
+        respFromAPI.inv[3].bc.IsNonAc=true
+        respFromAPI.inv[3].bc.IsSeater=false
+        respFromAPI.inv[3].bc.IsSleeper=true
+        filteredRespFromAPI=respFromAPI
+        return respFromAPI
     }
+    
+    // MARK: APPLYSORTANDFILTER() func
+    func appySortAndFilter(filterString:String,bustype:bc)->APIRespStruct{
+        var tempFilteredResp=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
+        tempFilteredResp.metaData.dst=respFromAPI.metaData.dst
+        tempFilteredResp.metaData.src=respFromAPI.metaData.src
+        tempFilteredResp.metaData.blu=respFromAPI.metaData.blu
+        if(filterString=="Rating"){
+            var ratingarray:[Double]=[]
+            
+            for i in respFromAPI.inv{
+                let temp=i.rt.totRt
+                var flag=0
+                for j in ratingarray{
+                    if(temp==j){
+                        flag=1
+                        break;
+                    }
+                }
+                if(flag==0){
+                ratingarray.append(i.rt.totRt)
+                }
+            }
+            ratingarray.sort()
+            let reversedRatingArray:[Double]=Array(ratingarray.reversed())
+            ratingarray=reversedRatingArray
+            for j in 0..<ratingarray.count{
+                for i in respFromAPI.inv{
+                if(ratingarray[j]==i.rt.totRt){
+                    tempFilteredResp.inv.append(i)
+                }
+                }
+            }
+            filteredRespFromAPI=tempFilteredResp
+            applyFilter(bustype: bustype)
+            return filteredRespFromAPI
+            
+        }
+        else if(filterString=="Departure"){
+            var departureArray:[String]=[]
+            for i in respFromAPI.inv{
+                let temp=i.dt
+                var flag=0
+                for j in departureArray{
+                    if(temp==j){
+                        flag=1
+                        break;
+                    }
+                }
+                if(flag==0){
+                departureArray.append(i.dt)
+                }
+            }
+            departureArray.sort()
+            for j in 0..<departureArray.count{
+                for i in respFromAPI.inv{
+                    if(departureArray[j]==i.dt){
+                        tempFilteredResp.inv.append(i)
+                    }
+                }
+            }
+            filteredRespFromAPI=tempFilteredResp
+            applyFilter(bustype: bustype)
+            return filteredRespFromAPI
+            
+            
+        }
+        else if(filterString=="Fair"){
+            var fairArray:[Int]=[]
+            for i in respFromAPI.inv{
+                let temp=i.minfr
+                var flag=0
+                for j in fairArray{
+                    if(temp==j){
+                        flag=1
+                        break;
+                    }
+                }
+                if(flag==0){
+                fairArray.append(i.minfr)
+                }
+            }
+            fairArray.sort()
+            for j in 0..<fairArray.count{
+                for i in respFromAPI.inv{
+                    if(fairArray[j]==i.minfr){
+                        tempFilteredResp.inv.append(i)
+                    }
+                }
+            }
+            filteredRespFromAPI=tempFilteredResp
+            applyFilter(bustype: bustype)
+            return filteredRespFromAPI
+            
+            
+        }
+        else{
+            filteredRespFromAPI=respFromAPI
+            applyFilter(bustype: bustype)
+            return filteredRespFromAPI
+        }
+        return respFromAPI
+    }
+    
+    
+    //MARK: APPLYFILTER() func
+    func applyFilter(bustype:bc){
+        var tempFilteredResp=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
+        tempFilteredResp.metaData.dst=respFromAPI.metaData.dst
+        tempFilteredResp.metaData.src=respFromAPI.metaData.src
+        tempFilteredResp.metaData.blu=respFromAPI.metaData.blu
+        for i in filteredRespFromAPI.inv{
+            var flag=0
+            if(bustype.isAC){
+                if(i.bc.IsAc==false){
+                    flag=1;
+                }
+            }
+            if(bustype.isNonAc){
+                if(i.bc.IsNonAc==false){
+                    flag=1;
+                }
+            }
+            if(bustype.isSleeper){
+                if(i.bc.IsSleeper==false){
+                    flag=1;
+                }
+            }
+            if(bustype.isSeater){
+                if(i.bc.IsSeater==false){
+                    flag=1;
+                }
+            }
+            if(flag==0){
+                tempFilteredResp.inv.append(i)
+            }
+        }
+        filteredRespFromAPI=tempFilteredResp
+    }
+    
+    
+    
+    
+    
+    
+    //MARK: GETDATE() func
     func getDate(arrival:String)->String{
         var arrivalDate=""
         arrivalDate.append(arrival[String.Index(encodedOffset: 8)])
@@ -90,7 +234,7 @@ class ViewControllerModel{
                                    
         return arrivalDate
     }
-    
+    //MARK: GETTIME() func
     func getTime(timeStamp:String)->String{
         var time=""
         time.append(timeStamp[String.Index(encodedOffset: 11)])
@@ -99,5 +243,9 @@ class ViewControllerModel{
         time.append(timeStamp[String.Index(encodedOffset: 14)])
         time.append(timeStamp[String.Index(encodedOffset: 15)])
         return time
+    }
+    
+    func getImage(url:String)->UIImage{
+        NetworkManagerInstance.getImagefromURL(link: url)
     }
 }

@@ -10,7 +10,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SortAndFilterViewController" customModule="Assignment6" customModuleProvider="target">
             <connections>
+                <outlet property="acSwitch" destination="aoP-mL-2XM" id="nnx-9G-5Ia"/>
                 <outlet property="applyFilterButton" destination="2xw-G8-PKh" id="T98-iA-kVc"/>
+                <outlet property="departureSwitch" destination="6UJ-73-QmY" id="AtR-Hl-zo1"/>
+                <outlet property="fareSwitch" destination="qbR-Ja-VWT" id="13c-kC-7Yg"/>
+                <outlet property="nonAcSwitch" destination="bK0-m2-NPW" id="PyR-zP-5a0"/>
+                <outlet property="ratingSwitch" destination="EpD-Bj-NkA" id="fiL-Pj-Ygz"/>
+                <outlet property="seaterSwitch" destination="Vcg-Gt-WEQ" id="Gkb-Sd-2sS"/>
+                <outlet property="sleeperSwitch" destination="593-Ip-ElA" id="JPu-XV-ktt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,7 +37,7 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXI-be-ftO">
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VXI-be-ftO" userLabel="RatingStackView">
                     <rect key="frame" x="20" y="391" width="374" height="31"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rating" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOg-Te-VuK">
@@ -60,7 +67,7 @@
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="uRq-uU-Vme"/>
                 </stackView>
-                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="571-gi-rrJ">
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="571-gi-rrJ" userLabel="FareStackView">
                     <rect key="frame" x="20" y="473" width="374" height="31"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fare" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COk-Vd-Bf9">

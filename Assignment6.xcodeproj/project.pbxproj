@@ -21,6 +21,7 @@
 		2AD9590C282938B90065380C /* ViewControllerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AD9590B282938B90065380C /* ViewControllerModel.swift */; };
 		2AE0B63B282A340100A52351 /* BusesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE0B639282A340100A52351 /* BusesTableViewCell.swift */; };
 		2AE0B63C282A340100A52351 /* BusesTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2AE0B63A282A340100A52351 /* BusesTableViewCell.xib */; };
+		2AE0B63E282B930C00A52351 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE0B63D282B930C00A52351 /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		2AD9590B282938B90065380C /* ViewControllerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerModel.swift; sourceTree = "<group>"; };
 		2AE0B639282A340100A52351 /* BusesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusesTableViewCell.swift; sourceTree = "<group>"; };
 		2AE0B63A282A340100A52351 /* BusesTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusesTableViewCell.xib; sourceTree = "<group>"; };
+		2AE0B63D282B930C00A52351 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		2AD958D5282937C60065380C /* Assignment6 */ = {
 			isa = PBXGroup;
 			children = (
+				2AE0B63F282B931800A52351 /* NetworkManager */,
 				2AD9590A282938A60065380C /* Model */,
 				2AD958D6282937C60065380C /* AppDelegate.swift */,
 				2AD958D8282937C60065380C /* SceneDelegate.swift */,
@@ -148,6 +151,14 @@
 				2AD9590B282938B90065380C /* ViewControllerModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2AE0B63F282B931800A52351 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				2AE0B63D282B930C00A52351 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -286,6 +297,7 @@
 				2AD959082829389D0065380C /* SortAndFilterViewController.swift in Sources */,
 				2AD958DB282937C60065380C /* ViewController.swift in Sources */,
 				2AD958D7282937C60065380C /* AppDelegate.swift in Sources */,
+				2AE0B63E282B930C00A52351 /* NetworkManager.swift in Sources */,
 				2AD9590C282938B90065380C /* ViewControllerModel.swift in Sources */,
 				2AE0B63B282A340100A52351 /* BusesTableViewCell.swift in Sources */,
 				2AD958D9282937C60065380C /* SceneDelegate.swift in Sources */,
