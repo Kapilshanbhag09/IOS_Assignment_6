@@ -37,6 +37,12 @@
                                 <rect key="frame" x="0.0" y="112" width="414" height="719"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqw-Ia-h0d">
+                                <rect key="frame" x="147" y="429" width="120" height="38.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -48,8 +54,10 @@
                             <constraint firstItem="7IF-J3-EGq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="UW1-8Y-WMf"/>
                             <constraint firstItem="7IF-J3-EGq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="10" id="bvB-ta-OuR"/>
                             <constraint firstItem="tra-ei-pz5" firstAttribute="top" secondItem="t11-da-JWx" secondAttribute="bottom" id="cRQ-iz-uaU"/>
+                            <constraint firstItem="bqw-Ia-h0d" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ecY-kj-oZy"/>
                             <constraint firstItem="bhx-8z-6Mw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="iXG-Ou-ubT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tra-ei-pz5" secondAttribute="bottom" id="p6N-Ov-7oP"/>
+                            <constraint firstItem="bqw-Ia-h0d" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="rNA-gY-yno"/>
                             <constraint firstItem="t11-da-JWx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xeN-yH-u2w"/>
                         </constraints>
                     </view>
@@ -57,6 +65,7 @@
                         <outlet property="applyFilterButton" destination="tra-ei-pz5" id="TsW-7E-0ck"/>
                         <outlet property="busesTableView" destination="t11-da-JWx" id="aK2-T3-ILX"/>
                         <outlet property="fromLabel" destination="7IF-J3-EGq" id="czO-n2-tcD"/>
+                        <outlet property="loadingLabel" destination="bqw-Ia-h0d" id="K2s-Yn-0Lm"/>
                         <outlet property="toLabel" destination="bhx-8z-6Mw" id="oWW-JD-Xjr"/>
                     </connections>
                 </viewController>

@@ -20,22 +20,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="737" height="139"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D1i-Lf-Der">
-                                <rect key="frame" x="5" y="39" width="100" height="100"/>
+                                <rect key="frame" x="10" y="5" width="100" height="139"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="QgE-vG-fjc"/>
-                                    <constraint firstAttribute="height" constant="100" id="nCW-54-hKm"/>
+                                    <constraint firstAttribute="width" constant="100" id="6RZ-qg-Vt9"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wCw-Ep-BCi">
-                                <rect key="frame" x="105" y="39" width="632" height="100"/>
+                                <rect key="frame" x="120" y="5" width="617" height="139"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="D1i-Lf-Der" firstAttribute="top" secondItem="cjP-lJ-t6p" secondAttribute="top" constant="5" id="C7W-4i-tRP"/>
-                            <constraint firstItem="D1i-Lf-Der" firstAttribute="leading" secondItem="cjP-lJ-t6p" secondAttribute="leading" constant="5" id="wft-Oj-mFs"/>
+                            <constraint firstItem="D1i-Lf-Der" firstAttribute="top" secondItem="cjP-lJ-t6p" secondAttribute="top" constant="5" id="27T-xm-1Z5"/>
+                            <constraint firstAttribute="bottom" secondItem="D1i-Lf-Der" secondAttribute="bottom" constant="5" id="Iz8-BU-lu0"/>
+                            <constraint firstItem="D1i-Lf-Der" firstAttribute="leading" secondItem="cjP-lJ-t6p" secondAttribute="leading" constant="10" id="UAo-f6-MRE"/>
+                            <constraint firstItem="wCw-Ep-BCi" firstAttribute="leading" secondItem="cjP-lJ-t6p" secondAttribute="leading" constant="120" id="apf-Az-nkL"/>
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PKT-qO-boI">
@@ -75,7 +76,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.94169431920000002" green="0.64143627879999998" blue="0.2312202156" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Sn7-u7-4mR" userLabel="RatingSView">
                                 <rect key="frame" x="597" y="0.0" width="100" height="114"/>
@@ -85,7 +85,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="o4Z-DG-KrF"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -96,7 +96,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.78182435039999998" green="0.34143239260000002" blue="0.34900414940000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="HJz-hn-R4D"/>
                                     <constraint firstItem="dUT-hO-DuL" firstAttribute="centerX" secondItem="Sn7-u7-4mR" secondAttribute="centerX" id="MXG-lO-R38"/>

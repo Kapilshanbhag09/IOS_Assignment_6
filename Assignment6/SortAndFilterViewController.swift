@@ -22,6 +22,7 @@ class SortAndFilterViewController: UIViewController {
     @IBOutlet weak var nonAcSwitch:UISwitch!
     @IBOutlet weak var seaterSwitch:UISwitch!
     @IBOutlet weak var sleeperSwitch:UISwitch!
+    @IBOutlet weak var applyingFilter:UILabel!
     var filterString=""
     var bustype=bc(isAC: false, isNonAc: false, isSeater: false, isSleeper: false)
     
@@ -29,6 +30,7 @@ class SortAndFilterViewController: UIViewController {
     
     @IBOutlet weak var applyFilterButton:UIButton!
     override func viewDidLoad() {
+        applyingFilter.text=""
         super.viewDidLoad()
         fareSwitch.isOn=false
         ratingSwitch.isOn=false
@@ -49,8 +51,11 @@ class SortAndFilterViewController: UIViewController {
         applyFilterButton.addTarget(self, action: #selector(applyFilterButton1Clicked), for: .touchUpInside)
     }
     @objc func applyFilterButton1Clicked(){
-        delegate?.filterApplied(filterString: filterString, busType: bustype);
+        applyingFilter.text="Applying Filter..."
         dismiss(animated: true)
+        delegate?.filterApplied(filterString: filterString, busType: bustype);
+        applyingFilter.text=""
+
     }
     @objc func ratingSwitchClicked(){
         departureSwitch.isOn=false

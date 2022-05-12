@@ -33,44 +33,44 @@ struct APIRespStruct:Decodable{
 }
 
 class ViewControllerModel{
+    var viewControllerDelegate:FilterAndSortDelegate?
     var respFromAPI=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
     var filteredRespFromAPI=APIRespStruct(metaData: MetaDataStruct(dst: "", src: "", blu: ""), inv: [])
     var NetworkManagerInstance=NetworkManager()
     // MARK: GETDATAFROMAPI() func
     func getDataFromAPI()->APIRespStruct{
         let url = URL(string:  "https://api.jsonbin.io/b/6093c95293e0ce40806d8a1d")!
-        let semaphore = DispatchSemaphore(value: 0)
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
             guard let data = data else { return }
             let strdata=String(data: data, encoding: .utf8)
             do{
                 let response=try JSONDecoder().decode(APIRespStruct.self, from:Data(strdata!.utf8))
                 self.respFromAPI=response
+                self.respFromAPI.inv[0].minfr=20
+                self.respFromAPI.inv[1].minfr=15
+                self.respFromAPI.inv[2].rt.totRt=4.5
+                self.respFromAPI.inv[3].rt.totRt=5.0
+                self.respFromAPI.inv[4].rt.totRt=2.0
+                self.respFromAPI.inv[0].dt="2021-05-22 17:30:00"
+                self.respFromAPI.inv[1].dt="2021-05-22 12:00:00"
+                self.respFromAPI.inv[0].bc.IsAc=false
+                self.respFromAPI.inv[0].bc.IsNonAc=true
+                self.respFromAPI.inv[1].bc.IsSeater=false
+                self.respFromAPI.inv[1].bc.IsSleeper=true
+                self.respFromAPI.inv[3].bc.IsAc=false
+                self.respFromAPI.inv[3].bc.IsNonAc=true
+                self.respFromAPI.inv[3].bc.IsSeater=false
+                self.respFromAPI.inv[3].bc.IsSleeper=true
+                self.filteredRespFromAPI = self.respFromAPI
+                self.viewControllerDelegate?.recievedResponse(responseFromAPI: self.respFromAPI)
                 
             }
             catch{
                 print(error)
             }
-            semaphore.signal()
         }
         task.resume()
-        semaphore.wait()
-        respFromAPI.inv[0].minfr=20
-        respFromAPI.inv[1].minfr=15
-        respFromAPI.inv[2].rt.totRt=4.5
-        respFromAPI.inv[3].rt.totRt=5.0
-        respFromAPI.inv[4].rt.totRt=4.0
-        respFromAPI.inv[0].dt="2021-05-22 17:30:00"
-        respFromAPI.inv[1].dt="2021-05-22 12:00:00"
-        respFromAPI.inv[0].bc.IsAc=false
-        respFromAPI.inv[0].bc.IsNonAc=true
-        respFromAPI.inv[1].bc.IsSeater=false
-        respFromAPI.inv[1].bc.IsSleeper=true
-        respFromAPI.inv[3].bc.IsAc=false
-        respFromAPI.inv[3].bc.IsNonAc=true
-        respFromAPI.inv[3].bc.IsSeater=false
-        respFromAPI.inv[3].bc.IsSleeper=true
-        filteredRespFromAPI=respFromAPI
+       
         return respFromAPI
     }
     
@@ -221,27 +221,27 @@ class ViewControllerModel{
     //MARK: GETDATE() func
     func getDate(arrival:String)->String{
         var arrivalDate=""
-        arrivalDate.append(arrival[String.Index(encodedOffset: 8)])
-        arrivalDate.append(arrival[String.Index(encodedOffset: 9)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 8,in: arrival)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 9,in: arrival)])
         arrivalDate.append("-")
-        arrivalDate.append(arrival[String.Index(encodedOffset: 5)])
-        arrivalDate.append(arrival[String.Index(encodedOffset: 6)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 5,in: arrival)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 6,in: arrival)])
         arrivalDate.append("-")
-        arrivalDate.append(arrival[String.Index(encodedOffset: 0)])
-        arrivalDate.append(arrival[String.Index(encodedOffset: 1)])
-        arrivalDate.append(arrival[String.Index(encodedOffset: 2)])
-        arrivalDate.append(arrival[String.Index(encodedOffset: 3)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 0,in: arrival)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 1,in: arrival)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 2,in: arrival)])
+        arrivalDate.append(arrival[String.Index(utf16Offset: 3,in: arrival)])
                                    
         return arrivalDate
     }
     //MARK: GETTIME() func
     func getTime(timeStamp:String)->String{
         var time=""
-        time.append(timeStamp[String.Index(encodedOffset: 11)])
-        time.append(timeStamp[String.Index(encodedOffset: 12)])
+        time.append(timeStamp[String.Index(utf16Offset: 11,in: timeStamp)])
+        time.append(timeStamp[String.Index(utf16Offset: 12,in: timeStamp)])
         time.append(":")
-        time.append(timeStamp[String.Index(encodedOffset: 14)])
-        time.append(timeStamp[String.Index(encodedOffset: 15)])
+        time.append(timeStamp[String.Index(utf16Offset: 14,in: timeStamp)])
+        time.append(timeStamp[String.Index(utf16Offset: 15,in: timeStamp)])
         return time
     }
     
