@@ -32,6 +32,13 @@ class SortAndFilterViewController: UIViewController {
     override func viewDidLoad() {
         applyingFilter.text=""
         super.viewDidLoad()
+        setSwitches()
+        
+        // Do any additional setup after loading the view.
+        applyFilterButton.addTarget(self, action: #selector(applyFilterButton1Clicked), for: .touchUpInside)
+    }
+    
+    func setSwitches(){
         fareSwitch.isOn=false
         ratingSwitch.isOn=false
         departureSwitch.isOn=false
@@ -47,8 +54,6 @@ class SortAndFilterViewController: UIViewController {
         seaterSwitch.addTarget(self, action: #selector(seaterSwitchClicked), for: .valueChanged)
         sleeperSwitch.addTarget(self, action: #selector(sleeperSwitchClicked), for: .valueChanged)
         
-        // Do any additional setup after loading the view.
-        applyFilterButton.addTarget(self, action: #selector(applyFilterButton1Clicked), for: .touchUpInside)
     }
     @objc func applyFilterButton1Clicked(){
         applyingFilter.text="Applying Filter..."

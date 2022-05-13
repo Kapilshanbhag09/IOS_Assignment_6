@@ -34,6 +34,7 @@ class ViewController: UIViewController,FilterAndSortDelegate {
         fromLabel.text=""
         toLabel.text=""
         applyFilterButton.addTarget(self, action: #selector(applyFilterButtonClicked), for: .touchUpInside)
+        applyFilterButton.isHidden=true
         
         self.busesTableView.dataSource = self
         busesTableView.register(UINib(nibName: "BusesTableViewCell", bundle: nil), forCellReuseIdentifier:"tableViewCell")
@@ -55,6 +56,7 @@ class ViewController: UIViewController,FilterAndSortDelegate {
             self.toLabel.text="To : "+responseFromAPI.metaData.dst
             self.loadingLabel.isHidden=true
             self.busesTableView.reloadData()
+            self.applyFilterButton.isHidden=false
         }
      
         
